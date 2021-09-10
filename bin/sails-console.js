@@ -128,6 +128,8 @@ module.exports = function() {
  * it works as expected.
  */
 
+const noop = () => {};
+
 function history(repl, file) {
 
   try {
@@ -142,7 +144,7 @@ function history(repl, file) {
 
   repl.rli.addListener('line', function(code) {
     if (code && code !== '.history') {
-      fs.write(fd, code + '\n');
+      fs.write(fd, code + '\n', noop);
     } else {
       repl.rli.historyIndex++;
       repl.rli.history.pop();
